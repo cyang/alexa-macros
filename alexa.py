@@ -130,7 +130,7 @@ def get_macros(intent, session):
     grams_carbs = (2420 - (135 * 4) - (67.2222 * 9))/4 = 318.7501g
     '''
 
-    card_title = intent['name']
+    card_title = "Macro Nutrition Intent"
     session_attributes = {}
     should_end_session = False
 
@@ -145,6 +145,8 @@ def get_macros(intent, session):
 
         speech_output  = '%d grams of protein, %d grams of carbs, and %d grams of fat' % (grams_protein, grams_carbs, grams_fat)
         reprompt_text = ""
+
+        should_end_session = True;
     else:
         speech_output = "I'm not sure what your body weight and total calories  are. " \
                         "Please try again."
