@@ -1,0 +1,96 @@
+{
+  "intents": [
+    {
+      "name": "AMAZON.CancelIntent",
+      "samples": []
+    },
+    {
+      "name": "AMAZON.HelpIntent",
+      "samples": []
+    },
+    {
+      "name": "AMAZON.StopIntent",
+      "samples": []
+    },
+    {
+      "name": "getMacroNutritionIntent",
+      "samples": [
+        "get macros for {bodyWeight} pounds and {totalCalories} calories",
+        "what are my macros for  {bodyWeight} pounds and {totalCalories} calories",
+        "what's my macros for  {bodyWeight} pounds and {totalCalories} calories"
+      ],
+      "slots": [
+        {
+          "name": "totalCalories",
+          "type": "AMAZON.NUMBER",
+          "samples": [
+            "{totalCalories} calories",
+            "{totalCalories}"
+          ]
+        },
+        {
+          "name": "bodyWeight",
+          "type": "AMAZON.NUMBER",
+          "samples": [
+            "{bodyWeight} pounds",
+            "{bodyWeight}"
+          ]
+        }
+      ]
+    }
+  ],
+  "prompts": [
+    {
+      "id": "Elicit.Intent-getMacroNutritionIntent.IntentSlot-totalCalories",
+      "promptVersion": "1.0",
+      "definitionVersion": "1.0",
+      "variations": [
+        {
+          "type": "PlainText",
+          "value": "What is your daily total calories?"
+        }
+      ]
+    },
+    {
+      "id": "Elicit.Intent-getMacroNutritionIntent.IntentSlot-bodyWeight",
+      "promptVersion": "1.0",
+      "definitionVersion": "1.0",
+      "variations": [
+        {
+          "type": "PlainText",
+          "value": "What is your body weight in pounds?"
+        }
+      ]
+    }
+  ],
+  "dialog": {
+    "version": "1.0",
+    "intents": [
+      {
+        "name": "getMacroNutritionIntent",
+        "confirmationRequired": false,
+        "prompts": {},
+        "slots": [
+          {
+            "name": "totalCalories",
+            "type": "AMAZON.NUMBER",
+            "elicitationRequired": true,
+            "confirmationRequired": false,
+            "prompts": {
+              "elicit": "Elicit.Intent-getMacroNutritionIntent.IntentSlot-totalCalories"
+            }
+          },
+          {
+            "name": "bodyWeight",
+            "type": "AMAZON.NUMBER",
+            "elicitationRequired": true,
+            "confirmationRequired": false,
+            "prompts": {
+              "elicit": "Elicit.Intent-getMacroNutritionIntent.IntentSlot-bodyWeight"
+            }
+          }
+        ]
+      }
+    ]
+  }
+}

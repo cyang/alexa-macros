@@ -22,9 +22,6 @@ def lambda_handler(event, context):
     prevent someone else from configuring a skill that sends requests to this
     function.
     """
-    # if (event['session']['application']['applicationId'] !=
-    #         "amzn1.echo-sdk-ams.app.[unique-value-here]"):
-    #     raise ValueError("Invalid Application ID")
 
     if event['session']['new']:
         on_session_started({'requestId': event['request']['requestId']},
@@ -70,6 +67,9 @@ def on_intent(intent_request, session):
         return get_macros(intent, session)
     elif intent_name == "AMAZON.HelpIntent":
         return get_welcome_response()
+    elif (intent_name == "AMAZON.StopIntent" or
+            intent_name == "AMAZON.CancelIntent"):
+        return get_halt_response()
     else:
         raise ValueError("Invalid intent")
 
@@ -93,17 +93,22 @@ def get_welcome_response():
 
     session_attributes = {}
     card_title = "Welcome"
-    speech_output = "Welcome to the Alexa Skills Kit sample. " \
+    speech_output = "Welcome to the Alexa Macro Nutrition skill. " \
                     "Please tell me your body weight and total calories by saying, " \
                     "get macros for 140 calories and 2500 calories."
 
     # If the user either does not reply to the welcome message or says something
     # that is not understood, they will be prompted again with this text.
-    reprompt_text =     "Please tell me your body weight and total calories by  saying, " \
-        "get macros for 140 calories and 2500 calories."
+    reprompt_text = "Please tell me your body weight and total calories by  saying, " \
+                    "get macros for 140 calories and 2500 calories."
     should_end_session = False
     return build_response(session_attributes, build_speechlet_response(
         card_title, speech_output, reprompt_text, should_end_session))
+
+def get_halt_response():
+    """Stops skill"""
+    return build_response({}, build_speechlet_response(
+        "Macro Nutrition skill has been canceled", "", "", True))
 
 def get_macros(intent, session):
     '''
