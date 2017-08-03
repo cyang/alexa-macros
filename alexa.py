@@ -95,12 +95,12 @@ def get_welcome_response():
     card_title = "Welcome"
     speech_output = "Welcome to the Alexa Macro Nutrition skill. " \
                     "Please tell me your body weight and total calories by saying, " \
-                    "get macros for 140 calories and 2500 calories."
+                    "get macros for 140 pounds and 2500 calories."
 
     # If the user either does not reply to the welcome message or says something
     # that is not understood, they will be prompted again with this text.
     reprompt_text = "Please tell me your body weight and total calories by  saying, " \
-                    "get macros for 140 calories and 2500 calories."
+                    "get macros for 140 pounds and 2500 calories."
     should_end_session = False
     return build_response(session_attributes, build_speechlet_response(
         card_title, speech_output, reprompt_text, should_end_session))
@@ -152,7 +152,7 @@ def get_macros(intent, session):
                         "Please try again."
         reprompt_text = "I'm not sure what your body weight and total calories  are. " \
                         "You can tell me your body weight and total calories by saying, " \
-                        "get macros for 140 calories and 2500 calories."
+                        "get macros for 140 pounds and 2500 calories."
     return build_response(session_attributes, build_speechlet_response(
         card_title, speech_output, reprompt_text, should_end_session))
 
@@ -168,8 +168,8 @@ def build_speechlet_response(title, output, reprompt_text, should_end_session):
         },
         'card': {
             'type': 'Simple',
-            'title': 'SessionSpeechlet - ' + title,
-            'content': 'SessionSpeechlet - ' + output
+            'title': title,
+            'content': output
         },
         'reprompt': {
             'outputSpeech': {
