@@ -1,0 +1,3 @@
+getMacroNutritionIntent what's my macros for  {bodyWeight} pounds and {totalCalories} calories
+getMacroNutritionIntent what are my macros for  {bodyWeight} pounds and {totalCalories} calories
+getMacroNutritionIntent get macros for {bodyWeight} pounds and {totalCalories} calories
